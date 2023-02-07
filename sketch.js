@@ -4,7 +4,7 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
 var canvas, angle, tower, ground, cannon;
-//crie uma matriz vazia
+var balls = []; //crie uma matriz vazia
 
 
 function preload() {
@@ -30,25 +30,29 @@ function setup() {
 function draw() {
   background(189);
   image(backgroundImg, 0, 0, width, height);
-
- 
-
   Engine.update(engine);
   ground.display();
-
  
-
-  //crie um laço de repetição
-
+  for (var i = 0; i < balls.length; i++)  {
+    showCannonBalls(balls[i], i);
+  }
   cannon.display();
-  tower.display();
-
-  
+  tower.display();  
 }
+function keyPressed() {
+  if (keyCode === DOWN ARROW) {
+    var cannonBall = new CannonBall(cannon.x, cannon.y);
+    balls.push(cannonBall);
+  }
+} 
 
-//crie uma função de acionamento de tecla
-
-//crie uma função para exibir a bala
+function showCannonBalls (ball, index) {
+  ball.display();
+  if (ball.body.position.x >= width | ball.body.position.y >= height - 50) { 
+    Matter.World.remove(world, ball.body);
+    balls.splice(index, 1);
+  }
+} 
 
 
 
